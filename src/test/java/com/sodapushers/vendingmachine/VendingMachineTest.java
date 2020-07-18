@@ -43,5 +43,9 @@ public class VendingMachineTest {
         assertDisplayAfterInsertingCoins("0.50", QUARTER, QUARTER);
     }
 
+    @Test
+    public void givenANickelInsertedIntoMachine_displayStatus_returnsValueOfCoinsInserted() {
+        assertDisplayAfterInsertingCoins("0.05", "Nickel");
+    }
 
 }

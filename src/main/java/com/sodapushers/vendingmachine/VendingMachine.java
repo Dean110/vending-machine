@@ -14,6 +14,10 @@ public class VendingMachine {
     }
 
     public void insertCoin(String coin) {
-        coinSlotBalance = coinSlotBalance.add(BigDecimal.valueOf(.25));
+        if (coin.equalsIgnoreCase("Quarter")) {
+            coinSlotBalance = coinSlotBalance.add(BigDecimal.valueOf(.25));
+        }else {
+            coinSlotBalance = coinSlotBalance.add(BigDecimal.valueOf(.05));
+        }
     }
 }
