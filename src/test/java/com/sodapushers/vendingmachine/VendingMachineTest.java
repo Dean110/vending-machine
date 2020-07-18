@@ -11,8 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class VendingMachineTest {
 
-    public static final String QUARTER = "Quarter";
     public static final String INSERT_COIN = "INSERT COIN";
+    public static final String QUARTER = "Quarter";
+    public static final String NICKEL = "Nickel";
+    public static final String DIME = "Dime";
+    public static final String PENNY = "Penny";
     private VendingMachine underTest;
 
     private void assertDisplayAfterInsertingCoins(String expectedDisplay, String... coinsToAdd) {
@@ -47,8 +50,10 @@ public class VendingMachineTest {
         assertAll("Display does not match inserted coin value.",
                 () -> assertDisplayAfterInsertingCoins("0.25", QUARTER),
                 () -> assertDisplayAfterInsertingCoins("0.50", QUARTER, QUARTER),
-                () -> assertDisplayAfterInsertingCoins("0.05", "Nickel"),
-                () -> assertDisplayAfterInsertingCoins("0.10", "Dime")
+                () -> assertDisplayAfterInsertingCoins("0.05", NICKEL),
+                () -> assertDisplayAfterInsertingCoins("0.10", DIME),
+                () -> assertDisplayAfterInsertingCoins("0.10", DIME, PENNY)
+
         );
     }
 }
