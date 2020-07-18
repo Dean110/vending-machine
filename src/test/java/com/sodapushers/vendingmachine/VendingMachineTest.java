@@ -3,6 +3,8 @@ package com.sodapushers.vendingmachine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class VendingMachineTest {
@@ -10,6 +12,16 @@ public class VendingMachineTest {
     public static final String QUARTER = "Quarter";
     public static final String INSERT_COIN = "INSERT COIN";
     private VendingMachine underTest;
+
+    private void assertDisplayAfterInsertingCoins(String expectedDisplay, String... coinsToAdd) {
+        addCoinsToVendingMachine(coinsToAdd);
+        String displayText = underTest.displayStatus();
+        assertThat(displayText).isEqualTo(expectedDisplay);
+    }
+
+    private void addCoinsToVendingMachine(String... coins){
+        Arrays.stream(coins).forEach(underTest::insertCoin);
+    }
 
     @BeforeEach
     void setUp() {
@@ -24,16 +36,12 @@ public class VendingMachineTest {
 
     @Test
     public void givenASingleQuarterInsertedIntoMachine_displayStatus_returnsValueOfCoinsInserted() {
-        underTest.insertCoin(QUARTER);
-        String displayText = underTest.displayStatus();
-        assertThat(displayText).isEqualTo("0.25");
+        assertDisplayAfterInsertingCoins("0.25", QUARTER);
     }
     @Test
     public void givenATwoQuartersInsertedIntoMachine_displayStatus_returnsValueOfCoinsInserted(){
-        underTest.insertCoin(QUARTER);
-        underTest.insertCoin(QUARTER);
-        String displayText = underTest.displayStatus();
-        assertThat(displayText).isEqualTo("0.50");
+        assertDisplayAfterInsertingCoins("0.50", QUARTER, QUARTER);
     }
+
 
 }
