@@ -1,11 +1,13 @@
 package com.sodapushers.vendingmachine;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class VendingMachineTest {
 
@@ -14,18 +16,23 @@ public class VendingMachineTest {
     private VendingMachine underTest;
 
     private void assertDisplayAfterInsertingCoins(String expectedDisplay, String... coinsToAdd) {
+        initializeVendingMachine();
         addCoinsToVendingMachine(coinsToAdd);
         String displayText = underTest.displayStatus();
         assertThat(displayText).isEqualTo(expectedDisplay);
     }
 
-    private void addCoinsToVendingMachine(String... coins){
+    private void initializeVendingMachine() {
+        underTest = new VendingMachine();
+    }
+
+    private void addCoinsToVendingMachine(String... coins) {
         Arrays.stream(coins).forEach(underTest::insertCoin);
     }
 
     @BeforeEach
     void setUp() {
-        underTest = new VendingMachine();
+        initializeVendingMachine();
     }
 
     @Test
@@ -35,17 +42,12 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void givenASingleQuarterInsertedIntoMachine_displayStatus_returnsValueOfCoinsInserted() {
-        assertDisplayAfterInsertingCoins("0.25", QUARTER);
+    @DisplayName("displayStatus() returns the value of the accepted coins in the vending machine.")
+    public void givenANewlyInstantiatedVendingMachine_CoinsInsertedChangeTheDisplay() {
+        assertAll("Display does not match inserted coin value.",
+                () -> assertDisplayAfterInsertingCoins("0.25", QUARTER),
+                () -> assertDisplayAfterInsertingCoins("0.50", QUARTER, QUARTER),
+                () -> assertDisplayAfterInsertingCoins("0.05", "Nickel")
+        );
     }
-    @Test
-    public void givenATwoQuartersInsertedIntoMachine_displayStatus_returnsValueOfCoinsInserted(){
-        assertDisplayAfterInsertingCoins("0.50", QUARTER, QUARTER);
-    }
-
-    @Test
-    public void givenANickelInsertedIntoMachine_displayStatus_returnsValueOfCoinsInserted() {
-        assertDisplayAfterInsertingCoins("0.05", "Nickel");
-    }
-
 }
