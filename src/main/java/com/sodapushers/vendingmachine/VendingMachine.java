@@ -1,16 +1,19 @@
 package com.sodapushers.vendingmachine;
 
+import java.math.BigDecimal;
+
 public class VendingMachine {
-    private boolean hasCoin;
+
+    private BigDecimal coinSlotBalance = BigDecimal.ZERO;
 
     public String displayStatus() {
-        if(hasCoin){
-            return "0.25";
+        if (coinSlotBalance.doubleValue() == 0) {
+            return "INSERT COIN";
         }
-        return "INSERT COIN";
+        return coinSlotBalance.toString();
     }
 
     public void insertCoin(String coin) {
-        hasCoin = true;
+        coinSlotBalance = coinSlotBalance.add(BigDecimal.valueOf(.25));
     }
 }
