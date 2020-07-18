@@ -47,7 +47,8 @@ public class VendingMachineTest {
         assertAll("Display does not match inserted coin value.",
                 () -> assertDisplayAfterInsertingCoins("0.25", QUARTER),
                 () -> assertDisplayAfterInsertingCoins("0.50", QUARTER, QUARTER),
-                () -> assertDisplayAfterInsertingCoins("0.05", "Nickel")
+                () -> assertDisplayAfterInsertingCoins("0.05", "Nickel"),
+                () -> assertDisplayAfterInsertingCoins("0.10", "Dime")
         );
     }
 }
