@@ -1,11 +1,13 @@
 package com.sodapushers.vendingmachine;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VendingMachine {
 
     private BigDecimal coinSlotBalance = BigDecimal.ZERO;
+    private List<String> coinReturn = new ArrayList<>();
 
     public String displayStatus() {
         if (coinSlotBalance.doubleValue() == 0) {
@@ -21,10 +23,12 @@ public class VendingMachine {
             coinSlotBalance = coinSlotBalance.add(BigDecimal.valueOf(.10));
         } else if (coin.equalsIgnoreCase("Nickel")) {
             coinSlotBalance = coinSlotBalance.add(BigDecimal.valueOf(.05));
+        } else {
+            coinReturn.add(coin);
         }
     }
 
     public List<String> emptyCoinReturn() {
-        return List.of("Penny");
+        return coinReturn;
     }
 }
