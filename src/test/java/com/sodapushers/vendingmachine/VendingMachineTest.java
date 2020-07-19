@@ -62,4 +62,12 @@ public class VendingMachineTest {
         List<String> returnedCoins = underTest.emptyCoinReturn();
         assertThat(returnedCoins).containsExactly(PENNY);
     }
+    @Test
+    public void givenANewlyInstantiatedVendingMachine_EmptyCoinReturnRemovesCoinsFromCoinReturn(){
+        addCoinsToVendingMachine(PENNY);
+        underTest.emptyCoinReturn();
+        List<String> coinReturnContents = underTest.emptyCoinReturn();
+        assertThat(coinReturnContents).isEmpty();
+    }
+
 }

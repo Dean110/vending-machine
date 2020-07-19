@@ -29,6 +29,8 @@ public class VendingMachine {
     }
 
     public List<String> emptyCoinReturn() {
-        return coinReturn;
+        List<String> coinReturnContents = List.copyOf(coinReturn);
+        coinReturn.clear();
+        return coinReturnContents;
     }
 }
