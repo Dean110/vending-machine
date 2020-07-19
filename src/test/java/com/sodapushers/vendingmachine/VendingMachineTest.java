@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -53,7 +54,12 @@ public class VendingMachineTest {
                 () -> assertDisplayAfterInsertingCoins("0.05", NICKEL),
                 () -> assertDisplayAfterInsertingCoins("0.10", DIME),
                 () -> assertDisplayAfterInsertingCoins("0.10", DIME, PENNY)
-
         );
+    }
+    @Test
+    public void givenANewlyInstantiatedVendingMachine_RejectedCoinsArePassedToTheCoinReturn(){
+        addCoinsToVendingMachine(PENNY);
+        List<String> returnedCoins = underTest.emptyCoinReturn();
+        assertThat(returnedCoins).containsExactly(PENNY);
     }
 }

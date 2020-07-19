@@ -1,6 +1,7 @@
 package com.sodapushers.vendingmachine;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class VendingMachine {
 
@@ -18,8 +19,12 @@ public class VendingMachine {
             coinSlotBalance = coinSlotBalance.add(BigDecimal.valueOf(.25));
         } else if (coin.equalsIgnoreCase("Dime")) {
             coinSlotBalance = coinSlotBalance.add(BigDecimal.valueOf(.10));
-        } else if(coin.equalsIgnoreCase("Nickel")){
+        } else if (coin.equalsIgnoreCase("Nickel")) {
             coinSlotBalance = coinSlotBalance.add(BigDecimal.valueOf(.05));
         }
+    }
+
+    public List<String> emptyCoinReturn() {
+        return List.of("Penny");
     }
 }
